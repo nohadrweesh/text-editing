@@ -1,0 +1,29 @@
+{
+	"name": "Web Maker",
+	"version": "1.5.1",
+	"manifest_version": 2,
+	"description": "Convert new tabs into an offline playground for your web experiments",
+	"homepage_url": "https://kushagragour.in/lab/web-maker",
+	"permissions": [
+		"storage"
+	],
+	"chrome_url_overrides" : {
+		"newtab": "index.html"
+	},
+	"options_ui": {
+		"page": "options.html",
+		"chrome_style": true
+	},
+	"browser_action": {
+		"default_title": "Web Maker",
+		"default_icon": "icon-16.png"
+	},
+	"background": {
+		"scripts": [ "eventPage.js" ],
+		"persistent": false
+	},
+	"icons": {
+		"16": "icon-16.png",
+		"48": "icon-48.png"
+	}
+}

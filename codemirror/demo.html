@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<!-- meta -->
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+
+		<!-- title -->
+		<title>Example website</title>
+
+	<link rel="stylesheet" href="codeMirror.css">
+	<link rel="stylesheet" href="material.css">
+
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+	<script src="js/vendor/codemirror-4.1/lib/codemirror.js" type="text/javascript" charset="utf-8"></script>
+
+	<script src="js/vendor/codemirror-4.1/addon/selection/active-line.js" type="text/javascript" charset="utf-8"></script>
+
+	<link rel="stylesheet" href="js/vendor/codemirror-4.1/lib/codemirror.css" />
+
+
+
+	<!-- add Javascript-mode dependencies -->
+
+	<script src="js/vendor/codemirror-4.1/mode/javascript/javascript.js" type="text/javascript" charset="utf-8"></script>
+	<script src="js/vendor/codemirror-4.1/mode/css/css.js" type="text/javascript" charset="utf-8"></script>
+
+
+
+	<!-- add PHP-mode dependencies (replace dependency loading by require.js!) -->
+
+	<script src="js/vendor/codemirror-4.1/mode/xml/xml.js" type="text/javascript" charset="utf-8"></script>
+
+	<script src="js/vendor/codemirror-4.1/mode/htmlmixed/htmlmixed.js" type="text/javascript" charset="utf-8"></script>
+
+	
+
+	<style>
+		
+		h4 {
+		    margin-top: 20px;
+		}
+
+		#output {
+		    height: calc(100% - 70px);
+		    overflow: auto;
+		}
+		.CodeMirror {
+		    height: calc(100% - 145px);
+		}
+	</style>
+		
+	</head>
+	<body>
+
+		<div class="grid col-1-1 full-height">
+	    <div>
+	        <h5>Editor</h5>
+	        <!-- HTML selectors to switch the html source used in the editor and preview -->
+	        <p>
+	            <label class="radio"><input type="radio" name="html" checked value="1" onclick="setHtml('something')"><span>Html </span></label>
+	            <label class="radio"><input type="radio" name="html" value="1" onclick="setHtml('heading')"><span>css</span></label>
+	            <label class="radio"><input type="radio" name="html" value="1" onclick="setHtml('list')"><span>JS</span></label>
+	        </p>
+	        <!-- The code editor -->
+	        <textarea id="code-block"></textarea>
+	        <textarea id="code-block-css"></textarea>
+	        <textarea id="code-block-js"></textarea>
+	        
+	    </div>
+	    <!-- The preview window -->
+	    <div>
+	        <h5>Preview</h5>
+	        <div id="output" class="box"></div>
+	    </div>
+	</div>
+
+	<script>
+		
+		// Because it's easier to read errors :)
+			console.clear();
+
+			// The preview window
+			const $output = document.getElementById("output");
+
+			// The current html_values item being edited
+			let current;
+
+			// A list of html which will be used in the editor
+			let html_values = {    
+			    something:  '<div class="something">\n' +
+			                '    <span>Hello</span>\n' +
+			                '</div>',    
+			    
+			    heading:    'span{color:red;}',
+			    
+			    list:       '<ul class="a-list">\n' +
+			                '    <li>Number 1</li>\n' +
+			                '    <li>Number 2</li>\n' +
+			                '    <li>Number 3</li>\n' +
+			                '</ul>'
+			};
+
+			// Updates the preview window and html_values
+			function updateHtml () {
+			    const val            = codemirror.getValue();
+			    $output.innerHTML    = val;
+			    html_values[current] = val;
+			}
+
+			// Set the html_values item in the editor and preview
+			function setHtml(x) {
+			    current = x;
+			    codemirror.setValue(html_values[x]);
+			}
+
+			// The codeMirror editor object
+			let codemirror = CodeMirror.fromTextArea(
+			    document.getElementById("code-block"), 
+			    {
+			        lineNumbers     : true,
+			        lineWrapping    : true,
+			        mode            : "xml",
+			        htmlMode        : true,
+			        theme           : "twilight",
+			        tabSize         : 4,
+			        indentUnit      : 4
+			});
+
+			let codemirrorCss = CodeMirror.fromTextArea(
+			    document.getElementById("code-block-css"), 
+			    {
+			        lineNumbers     : true,
+			        lineWrapping    : true,
+			        mode            : "css",
+			        htmlMode        : true,
+			        theme           : "twilight",
+			        tabSize         : 4,
+			        indentUnit      : 4
+			});
+
+			let codemirrorJs = CodeMirror.fromTextArea(
+			    document.getElementById("code-block-js"), 
+			    {
+			        lineNumbers     : true,
+			        lineWrapping    : true,
+			        mode            : "javascript",
+			        htmlMode        : true,
+			        theme           : "twilight",
+			        tabSize         : 4,
+			        indentUnit      : 4
+			});
+
+			// On every keystroke the preview and html_values will be updated
+			codemirror.on("change", updateHtml);
+
+			// Start the page using html_values.something
+			setHtml("something");
+
+
+	</script>
+		
+	</body>
+</html>
+	

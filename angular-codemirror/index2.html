@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html ng-app="x">
+
+  <head>
+    <meta charset="utf-8" />
+    <title>UI.Codemirror : demo </title>
+
+
+    <!-- Le css -->
+    <link rel="stylesheet" type="text/css" href="http://codemirror.net/lib/codemirror.css"/>
+    <link rel="stylesheet" type="text/css" href="http://codemirror.net/theme/twilight.css"/>
+
+  </head>
+  <body>
+
+
+    <!-- Le content... -->
+<section>
+  <div ui-codemirror="{
+      lineNumbers: true,
+      theme:'twilight',
+      readOnly: 'nocursor',
+      lineWrapping : true,
+      mode: 'xml'
+    }" >&lt;html style=&quot;color: green&quot;&gt;
+&lt;!-- this is a comment --&gt;
+&lt;head&gt;
+&lt;title&gt;HTML Example&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+The indentation tries to be &lt;em&gt;somewhat &amp;quot;do what
+I mean&amp;quot;&lt;/em&gt;... but might not match your style.
+&lt;/body&gt;
+&lt;/html&gt;</div>
+</section>
+
+
+
+    <!-- Le vendor... -->
+      <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.6/angular.min.js"></script>
+      <script src="http://codemirror.net/lib/codemirror.js"></script>
+      <script src="http://codemirror.net/mode/xml/xml.js"></script>
+      <script src="https://rawgithub.com/angular-ui/ui-codemirror/bower/ui-codemirror.min.js"></script>
+    <script src="app.js"></script>
+  </body>
+</html>

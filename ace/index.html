@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>ACE in Action</title>
+<style type="text/css" media="screen">
+    #editor { 
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        width:200px;
+        height: 200px;
+    }
+    #preview-iframe { 
+        top: 200px;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        background-color: yellow;
+        width:200px;
+        height: 200px;
+        margin-left: 300px;
+    }
+</style>
+</head>
+<body>
+
+<div id="editor">console.log("noha");</div>
+<div id="preview-iframe">
+    <div id="blog_body"></div>
+</div>
+    
+<script src="./ace-builds/src-noconflict/ace.js" type="text/javascript" charset="utf-8"></script>
+<script>
+    //console.log("Test",ACE_NAMESPACE);
+    var editor = ace.edit("editor");
+    editor.setTheme("ace/theme/monokai");
+    editor.session.setMode("ace/mode/javascript");
+    editor.getSession().setMode("ace/mode/javascript");
+    editor.getSession().on('change', function () {
+        var val3 = editor.getSession().getValue();
+        console.log(val3);
+        $('#preview-iframe').contents().find('#blog_body').html(val3);
+        $('#blog-body').val(val3);
+    });
+</script>
+</body>
+</html>
